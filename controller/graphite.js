@@ -12,7 +12,7 @@ router.post('/', function(req, res) {
     console.log('headers')
     console.log(req.headers)
     console.log('body')
-    console.log(res.body)
+    console.log(req.body)
 
     res.send('ok')
 
