@@ -32,6 +32,8 @@ router.post('/', function(req, res) {
 
     if (state.toLowerCase() == "alerting") {
 
+        //cases 
+
         mysqlDal.updateDatabase(req.body)
             .then(function(result) {
                 return sshBl.executeShell(req.body, ip, 'bash test.bash test')

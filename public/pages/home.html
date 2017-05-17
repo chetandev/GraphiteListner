@@ -1,0 +1,18 @@
+<div class="wrap">
+    <div class="table">
+        <ul>
+            <li ng-repeat="data in serverData">
+                <div class="top">
+                    <h1>{{data.ip}}</h1>
+                    <div ng-class=" {'circle green': data.state == 'ok','circle red': data.state == 'alerting'}"></div>
+                </div>
+                <div class="bottom">
+                    <p ng-show="data.state=='alerting'?true:false"><span>Rule</span> {{data.rule_name}}</p>
+                    <p><span><a href="{{data.rule_url}}" target="_blank">graphna</a></span></p>
+                    <p><span>State</span> {{data.state}}</p>
+                    <p ng-show="data.state=='alerting'?true:false"><span>Desc</span> {{data.description}}</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
