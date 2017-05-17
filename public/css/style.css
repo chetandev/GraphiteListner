@@ -31,7 +31,7 @@ body {
 
 .table {
   background-color: #ffffff;
-  height: 280px;
+/*  height: 280px;*/
   width: 100%;
   margin-top: 100px;
 }
@@ -41,6 +41,8 @@ ul li {
   width: 199px;
   text-align: center;
   border-left: 1px solid #DDDCD8;
+  min-height: 280px;
+  background: #fff;
 }
 
 .top {
