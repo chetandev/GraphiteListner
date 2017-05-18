@@ -23,7 +23,7 @@ function obj() {
             ];
             mysqlConnectionPool.queryAsync(qryInsertOrders, arr)
                 .then(function(results) {
-                    console.log(results)
+               
                     resolve(results);
                 })
                 .catch(function(err) {
@@ -43,7 +43,6 @@ function obj() {
             var arr = [];
             mysqlConnectionPool.queryAsync(qryInsertOrders, arr)
                 .then(function(results) {
-                    console.log(results)
                     resolve(results);
                 })
                 .catch(function(err) {

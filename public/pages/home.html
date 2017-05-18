@@ -7,10 +7,11 @@
                     <div ng-class=" {'circle green': data.state == 'ok','circle red': data.state == 'alerting'}"></div>
                 </div>
                 <div class="bottom">
-                    <p ng-show="data.state=='alerting'?true:false"><span>Rule</span> {{data.rule_name}}</p>
-                    <p><span><a href="{{data.rule_url}}" target="_blank">graphna</a></span></p>
-                    <p><span>State</span> {{data.state}}</p>
-                    <p ng-show="data.state=='alerting'?true:false"><span>Desc</span> {{data.description}}</p>
+                    <p><span>State :</span> {{data.state}}</p>
+                    <div ng-repeat="t in data.ruleName">
+                        <p><span></span> {{t}}</p>
+                    </div>
+                    <!--       <p><span><a href="{{data.ruleUrl}}" target="_blank">{{data.ruleName}}</a></span></p> -->
                 </div>
             </li>
         </ul>

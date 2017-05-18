@@ -5,7 +5,7 @@ function obj() {
 
     this.getMySqlConnection = function() {
         var connection = mysql.createConnection({
-            host: '52.66.189.150',
+            host: '52.66.117.33',
             port: '3306',
             user: 'root',
             password: 'iradraj',
@@ -18,7 +18,7 @@ function obj() {
     this.getMySqlConnectionPool = function() {
         var connection = mysql.createPool({
             connectionLimit: 20,
-            host: '52.66.189.150',
+            host: '52.66.117.33',
             port: '3306',
             user: 'root',
             password: 'iradraj',

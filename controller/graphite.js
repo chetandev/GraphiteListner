@@ -1,9 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var graphiteBl = require(__base + '/bl/graphite_bl.js')
-var slackBl = require(__base + '/bl/slack.js')
-var sshBl = require(__base + '/bl/ssh.js')
-var mysqlDal = require(__base + '/dal/mysql.js')
 
 
 
@@ -13,55 +10,25 @@ var mysqlDal = require(__base + '/dal/mysql.js')
  * @return {[type]}
  */
 router.post('/', function(req, res) {
-    var ip = req.body.message;
-    var ruleName = req.body.ruleName;
-    var ruleUrl = req.body.ruleUrl;
-    var state = req.body.state;
-    var title = req.body.title;
 
+    graphiteBl.process_graphana_data(req.body)
+        .then(function(result) {
 
-    if (state.toLowerCase() == "ok") {
-        mysqlDal.updateDatabase(req.body)
-            .then(function(result) {
-                res.send('success')
+            res.send('success')
+        })
+        .catch(function(err) {
+            res.send(err)
 
-            }).catch(function(err) {
-                res.send(err.message)
-            })
-    }
-
-    if (state.toLowerCase() == "alerting") {
-
-        //cases 
-
-        mysqlDal.updateDatabase(req.body)
-            .then(function(result) {
-                return sshBl.executeShell(req.body, ip, 'bash test.bash test')
-            })
-            .then(function(result) {
-                if (result == 0) {
-                    slackBl.sendAlert(req.body, 'test', 'need manual efforts')
-                }
-                if (result == 1) {
-                    slackBl.sendOk(req.body, 'test', 'memory metrix ran successfully')
-                }
-            })
-            .then(function(result) {
-                res.send('success')
-            })
-            .catch(function(err) {
-                res.send(err.message)
-            })
-    }
+        })
 
 });
 
 
 router.get('/', function(req, res) {
-    //mysql 
-    mysqlDal.getServerStatus()
+
+    graphiteBl.getServerStatus()
         .then(function(result) {
-            res.send(result[0])
+            res.send(result)
         })
         .catch(function(err) {
             res.send(err)
@@ -88,3 +55,12 @@ module.exports = router;
 //   ruleUrl: 'http://localhost:3000/dashboard/db/collect_d-metrics?fullscreen&edit&tab=alert&panelId=1&orgId=1',
 //   state: 'ok',
 //   title: '[OK] Memory-Metrics alert' }
+//   
+//   
+
+
+// memory_cleanup 
+// disk_cleanup
+// node_process_start
+// cassandra_process_start
+// mysql_process_start
