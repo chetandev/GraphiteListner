@@ -5,6 +5,9 @@ var connectionManager = require(__base + '/connectionmanager');
 Promise.promisifyAll(require('mysql/lib/Connection').prototype);
 Promise.promisifyAll(require('mysql/lib/Pool').prototype);
 var mysqlConnectionPool = connectionManager.getMySqlConnectionPool();
+var statsd = require(__base + '/statsd.js')
+
+statsd.gauge("raphitelistner.mysql.connections", mysqlConnectionPool.active.length)
 
 function obj() {
 
@@ -23,12 +26,13 @@ function obj() {
             ];
             mysqlConnectionPool.queryAsync(qryInsertOrders, arr)
                 .then(function(results) {
-               
+
                     resolve(results);
                 })
                 .catch(function(err) {
                     console.log(err)
                     reject(err);
+                    statsd.increment('graphitelistner.mysql.error');
                 });
 
         });
@@ -48,6 +52,7 @@ function obj() {
                 .catch(function(err) {
                     console.log(err)
                     reject(err);
+                    statsd.increment('graphitelistner.mysql.error');
                 });
 
         });
