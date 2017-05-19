@@ -28,6 +28,7 @@ function obj() {
                 .then(function(results) {
 
                     resolve(results);
+                    statsd.increment('graphitelistner.mysql.query_per_sec');
                 })
                 .catch(function(err) {
                     console.log(err)
@@ -48,6 +49,7 @@ function obj() {
             mysqlConnectionPool.queryAsync(qryInsertOrders, arr)
                 .then(function(results) {
                     resolve(results);
+                    statsd.increment('graphitelistner.mysql.query_per_sec');
                 })
                 .catch(function(err) {
                     console.log(err)
