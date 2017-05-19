@@ -9,6 +9,9 @@ var statsd = require(__base + '/statsd.js')
 
 statsd.gauge("graphitelistner.mysql.connections", mysqlConnectionPool._allConnections.length)
 
+
+console.log("connections:" + mysqlConnectionPool._allConnections.length)
+
 function obj() {
 
     this.updateDatabase = function(data, funcName, description) {

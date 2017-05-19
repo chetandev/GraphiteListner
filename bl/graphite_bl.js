@@ -28,11 +28,18 @@ function process_graphana_data(data) {
                     return sshBl.executeShell(data, ip, `bash ${__config.shell_script_name} ${ruleName}`)
                 })
                 .then(function(result) {
-                    if (result == 0) {
-                        slackBl.sendAlert(data, ruleName, 'need manual efforts')
+                    //comma separated 0,step1,step2,step3
+
+                    var resultArray = result.split(',');
+
+                    var code = resultArray[0];
+                    var rules = result;
+
+                    if (code == 0) {
+                        slackBl.sendAlert(data, ruleName, `${rules} executed need manual efforts`)
                     }
-                    if (result == 1) {
-                        slackBl.sendOk(data, ruleName, `${ruleName} metrix ran successfully`)
+                    if (code == 1) {
+                        slackBl.sendOk(data, ruleName, `${rules} executed metrix ran successfully`)
                     }
                 })
                 .then(function(result) {
@@ -71,8 +78,8 @@ function getServerStatus() {
                         for (var i = 0; i < stateArray.length; i++) {
 
                             if (stateArray[i] == "ok") {
-                                 ruleNameArray.splice(i,1);
-                                 ruleUrlArray.splice(i,1);
+                                ruleNameArray.splice(i, 1);
+                                ruleUrlArray.splice(i, 1);
                             }
                         }
 
