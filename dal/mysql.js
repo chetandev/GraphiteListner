@@ -7,7 +7,7 @@ Promise.promisifyAll(require('mysql/lib/Pool').prototype);
 var mysqlConnectionPool = connectionManager.getMySqlConnectionPool();
 var statsd = require(__base + '/statsd.js')
 
-statsd.gauge("raphitelistner.mysql.connections", mysqlConnectionPool._allConnections.length)
+statsd.gauge("graphitelistner.mysql.connections", mysqlConnectionPool._allConnections.length)
 
 function obj() {
 
