@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var graphiteBl = require(__base + '/bl/graphite_bl.js')
-
+var statsd = require(__base + '/statsd.js')
 
 
 /**
@@ -11,24 +11,32 @@ var graphiteBl = require(__base + '/bl/graphite_bl.js')
  */
 router.post('/', function(req, res) {
 
+    statsd.increment('graphitelistner.request_per_sec.webhookapi');
+    var startDate = Date.now();
+
     graphiteBl.process_graphana_data(req.body)
         .then(function(result) {
-
             res.send('success')
+            var latency = Date.now() - startDate;
+            statsd.histogram('graphitelistner.response_time.webhookapi', latency)
         })
         .catch(function(err) {
             res.send(err)
-
         })
-
 });
 
 
 router.get('/', function(req, res) {
 
+    statsd.increment('graphitelistner.request_per_sec.statusapi');
+    var startDate = Date.now();
+
     graphiteBl.getServerStatus()
         .then(function(result) {
             res.send(result)
+
+            var latency = Date.now() - startDate;
+            statsd.histogram('graphitelistner.response_time.statusapi', latency)
         })
         .catch(function(err) {
             res.send(err)
