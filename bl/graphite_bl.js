@@ -51,6 +51,7 @@ function process_graphana_data(data) {
                     resolve('success')
                 })
                 .catch(function(err) {
+                    console.log(err)
                     reject(err.message)
                 })
         }

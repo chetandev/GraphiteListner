@@ -16,13 +16,16 @@ function executeShell(obj, ip, command) {
         });
 
         ssh
-            .exec('cd ' + __config.shell_script_path, {
-                
-                out: console.log.bind(console)
+            .exec('pwd', {
+
+                out: function(stdout) {
+                    console.log(stdout)
+                }
             })
             .exec('sudo ' + command, {
                 out: function(stdout) {
                     console.log('script ran success on  ' + ip);
+                    console.log('out' + stdout)
                     resolve(stdout)
                 },
                 err: function(stderr) {

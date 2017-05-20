@@ -13,7 +13,7 @@ router.post('/', function(req, res) {
 
     statsd.increment('graphitelistner.request_per_sec.webhookapi');
     var startDate = Date.now();
-
+    console.log('webhook request received')
     graphiteBl.process_graphana_data(req.body)
         .then(function(result) {
             res.send('success')
