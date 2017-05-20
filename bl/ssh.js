@@ -12,7 +12,7 @@ function executeShell(obj, ip, command) {
         var ssh = new SSH({
             host: ip,
             user: 'ubuntu',
-            key: fs.readFileSync(__config.ssh_key),
+            key: fs.readFileSync(__config.ssh_key)
         });
 
         ssh
@@ -29,6 +29,7 @@ function executeShell(obj, ip, command) {
                     resolve(stdout)
                 },
                 err: function(stderr) {
+                    console.log(stderr)
                     reject(stderr) // this-does-not-exist: command not found 
                 }
             }).start();
