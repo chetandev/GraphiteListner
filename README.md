@@ -11,3 +11,8 @@
 -puppet for mysql , node , casandra , nginx 
 
 -web socket for real time server event monitoring 
+
+
+swagger doc link 
+
+http://35.154.15.240/techgig/index.html

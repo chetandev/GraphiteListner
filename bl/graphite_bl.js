@@ -33,11 +33,13 @@ function process_graphana_data(data) {
                 .then(function(result) {
                     //comma separated 0,step1,step2,step3
                     //
-                       console.log('shell script ranh');
+                    console.log('shell script ranh');
 
                     var resultArray = result.split(',');
 
                     var code = resultArray[0];
+
+                    //var rules = result.substring(2, result.length);
                     var rules = result;
 
                     if (code == 0) {

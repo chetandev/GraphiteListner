@@ -16,6 +16,12 @@ function executeShell(obj, ip, command) {
         });
 
         ssh
+            .exec('cd ~', {
+
+                out: function(stdout) {
+                    console.log(stdout)
+                }
+            })
             .exec('pwd', {
 
                 out: function(stdout) {

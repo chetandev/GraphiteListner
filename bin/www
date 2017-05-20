@@ -7,6 +7,14 @@
 var app = require('../app');
 var debug = require('debug')('graphanalistner:server');
 var http = require('http');
+var statsd = require(__base + '/statsd.js')
+
+
+setInterval(function(){
+
+ statsd.increment('graphitelistner.health');
+
+},1000)
 
 /**
  * Get port from environment and store in Express.
