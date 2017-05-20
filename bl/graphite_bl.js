@@ -13,6 +13,7 @@ function process_graphana_data(data) {
         var title = data.title;
 
         if (state.toLowerCase() == "ok") {
+            console.log('state ok');
             mysqlDal.updateDatabase(data)
                 .then(function(result) {
                     resolve('success')
@@ -23,12 +24,16 @@ function process_graphana_data(data) {
         }
 
         if (state.toLowerCase() == "alerting") {
+            console.log('state alerting');
             mysqlDal.updateDatabase(data)
                 .then(function(result) {
+                    console.log('mysql  updated');
                     return sshBl.executeShell(data, ip, `bash ${__config.shell_script_name} ${ruleName}`)
                 })
                 .then(function(result) {
                     //comma separated 0,step1,step2,step3
+                    //
+                       console.log('shell script ranh');
 
                     var resultArray = result.split(',');
 

@@ -17,10 +17,12 @@ function executeShell(obj, ip, command) {
 
         ssh
             .exec('cd ' + __config.shell_script_path, {
+                console.log('in root dir of ' + ip);
                 out: console.log.bind(console)
             })
             .exec('sudo ' + command, {
                 out: function(stdout) {
+                    console.log('script ran success on  ' + ip);
                     resolve(stdout)
                 },
                 err: function(stderr) {
