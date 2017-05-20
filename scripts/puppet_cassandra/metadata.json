@@ -1,0 +1,17 @@
+{
+  "author": "atmesh",
+  "license": "Apache-2.0",
+  "name": "atmesh-messages_puppet_cassandra",
+  "operatingsystem_support": [{"operatingsystem": "RHEL",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]}],
+  "project_page": "",
+  "requirements": [],
+  "source": "local",
+  "summary": "project for cassandra",
+  "tags": [],
+  "version": "0.1.7",
+  "dependencies": [{"name":"puppet/archive","version_requirement":">= 1.0.0 < 5.0.0"}, {"name":"puppetlabs/stdlib","version_requirement":">= 4.2.0 < 5.0.0"}]
+}

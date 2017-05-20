@@ -1,0 +1,3 @@
+# messages_puppet_cassandra #
+
+This is the messages_puppet_cassandra module. It provides...

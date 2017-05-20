@@ -1,0 +1,3 @@
+# puppet_collectd #
+
+This is the puppet_collectd module. It provides...
