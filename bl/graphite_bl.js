@@ -75,7 +75,7 @@ function getServerStatus() {
                     var ruleUrlArray = item.ruleUrl.split(",");
                     var out = {}
 
-                    console.log(stateArray)
+
 
                     if (_.indexOf(stateArray, "alerting") == -1) {
                         out.ip = item.ip
@@ -83,11 +83,13 @@ function getServerStatus() {
                         outAray.push(out)
 
                     } else {
-                        for (var i = 0; i < stateArray.length; i++) {
+                        for (var i = 0; i <= stateArray.length; i++) {
 
                             if (stateArray[i] == "ok") {
-                                ruleNameArray.splice(i, 1);
-                                ruleUrlArray.splice(i, 1);
+
+                                delete ruleNameArray[i];
+                                delete ruleUrlArray[i];
+
                             }
                         }
 
